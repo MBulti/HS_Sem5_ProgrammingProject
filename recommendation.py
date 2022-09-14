@@ -11,7 +11,7 @@ listOfRecommendations = []
 
 def getListOfMovies():
     global listOfMovies
-    with open("data/movie_titles.csv", newline='', encoding='utf-8') as f:
+    with open("data/movie_titles.csv", newline='', encoding='latin-1') as f:
         reader = csv.reader(f) 
         if not listOfMovies:          
             listOfMovies = list(reader)
