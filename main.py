@@ -3,7 +3,6 @@ Implementation of Programming Project Flask API
 This returns the movie recommendation based on a entered movie
 """
 import os
-import asyncio
 
 from flask import Flask, request
 from flask_restful import Api

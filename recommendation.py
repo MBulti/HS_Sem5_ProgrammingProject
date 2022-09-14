@@ -1,7 +1,9 @@
-import csv, os, multiprocessing as mp
+import csv
 
-from itertools import count
-from multiprocessing import process
+# os, multiprocessing as mp
+
+# from itertools import count
+# from multiprocessing import process
 
 listOfMovies = []
 listOfRecommendations = []
