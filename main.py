@@ -22,7 +22,7 @@ def get_movies():
 def get_recommendation():
     requestData = request.form.get('movies')
     if (requestData is None):
-        return 'No input Data was given', 400
+        return 'No input data was given', 400
     movieList = requestData.split(',')
     if (movieList is None):
         return 'The input data is not in the correct format', 400
