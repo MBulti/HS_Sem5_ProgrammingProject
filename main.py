@@ -24,6 +24,11 @@ def test_routes():
         load_data()
     return 'Data loaded', 200
 
+@app.route('/data')
+def test_routes():
+        load_data()
+        return 200
+
 @app.route('/movies')
 def get_movies():
     return getListOfMovies()
