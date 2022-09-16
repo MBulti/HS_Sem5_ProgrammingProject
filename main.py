@@ -3,7 +3,6 @@ Implementation of Programming Project Flask API
 This returns the movie recommendation based on a entered movie
 """
 import os
-from pkgutil import get_data
 import wget
 
 from os.path import exists
