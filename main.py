@@ -20,6 +20,7 @@ def tessting_data():
 
 @app.route('/data')
 def test_routes():
+    global started
     if(not exists('combined_data_4.txt') and not started):
         print('yep')
         started = True
