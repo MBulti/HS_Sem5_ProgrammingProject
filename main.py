@@ -9,12 +9,6 @@ import wget
 from os.path import exists
 from flask import Flask, request
 from recommendation import *
-
-if(not exists('combined_data_4.txt')):
-    print('yep')
-    wget.download('https://zenodo.org/record/4556134/files/combined_data_4.txt?download=1')
-else:
-    print('nop')
     
 app = Flask(__name__)
 
@@ -26,7 +20,11 @@ def test_routes():
 
 @app.route('/data')
 def test_routes():
-        load_data()
+        if(not exists('combined_data_4.txt')):
+            print('yep')
+            wget.download('https://zenodo.org/record/4556134/files/combined_data_4.txt?download=1')
+        else:
+            print('nop')
         return 200
 
 @app.route('/movies')
