@@ -13,7 +13,7 @@ app = Flask(__name__)
 started = False
 
 @app.route('/dev')
-def test_routes():
+def tessting_data():
     if(not exists('netflix_rating.csv')):
         load_data()
     return 'Data loaded', 200
