@@ -20,12 +20,14 @@ def test_routes():
 
 @app.route('/data')
 def test_routes():
-        if(not exists('combined_data_4.txt')):
-            print('yep')
-            wget.download('https://zenodo.org/record/4556134/files/combined_data_4.txt?download=1')
-        else:
-            print('nop')
-        return 200
+    started = False
+    if(not exists('combined_data_4.txt') and not started):
+        print('yep')
+        started = True
+        wget.download('https://zenodo.org/record/4556134/files/combined_data_4.txt?download=1')
+    else:
+        print('nop')
+    return 200
 
 @app.route('/movies')
 def get_movies():
