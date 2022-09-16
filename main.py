@@ -12,7 +12,7 @@ from recommendation import *
 
 if(not exists('combined_data_4.txt')):
     print('yep')
-    #wget.download('https://zenodo.org/record/4556134/files/combined_data_4.txt?download=1')
+    wget.download('https://zenodo.org/record/4556134/files/combined_data_4.txt?download=1')
 else:
     print('nop')
     
