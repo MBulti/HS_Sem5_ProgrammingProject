@@ -3,14 +3,26 @@ Implementation of Programming Project Flask API
 This returns the movie recommendation based on a entered movie
 """
 import os
+from pkgutil import get_data
+import wget
 
+from os.path import exists
 from flask import Flask, request
-from flask_restful import Api
 from recommendation import *
 
+if(not exists('combined_data_4.txt')):
+    print('yep')
+    #wget.download('https://zenodo.org/record/4556134/files/combined_data_4.txt?download=1')
+else:
+    print('nop')
+    
 app = Flask(__name__)
-api = Api(app)
 
+@app.route('/test')
+def test_routes():
+    if(not exists('netflix_rating.csv')):
+        load_data()
+    return 'Data loaded', 200
 
 @app.route('/movies')
 def get_movies():
