@@ -11,6 +11,7 @@ from flask import Flask, request
 from recommendation import *
     
 app = Flask(__name__)
+started = False
 
 @app.route('/test')
 def test_routes():
@@ -20,7 +21,6 @@ def test_routes():
 
 @app.route('/data')
 def test_routes():
-    started = False
     if(not exists('combined_data_4.txt') and not started):
         print('yep')
         started = True
