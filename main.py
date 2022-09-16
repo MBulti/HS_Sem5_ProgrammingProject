@@ -12,7 +12,7 @@ from recommendation import *
 app = Flask(__name__)
 started = False
 
-@app.route('/test')
+@app.route('/dev')
 def test_routes():
     if(not exists('netflix_rating.csv')):
         load_data()
