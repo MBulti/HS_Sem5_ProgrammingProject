@@ -6,7 +6,7 @@ import os
 
 from flask_cors import CORS
 from flask import Flask, request
-from recommendation import getListOfMovies, getListOfRecommendations
+from functions.recommendation import getListOfMovies, getListOfRecommendations
 
 __all__ = [getListOfMovies, getListOfRecommendations]
     

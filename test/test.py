@@ -1,6 +1,6 @@
 import unittest
 
-from recommendation import getListOfMovies
+from functions.recommendation import getListOfMovies
     
 
 class TestApiFunctionallity(unittest.TestCase):
