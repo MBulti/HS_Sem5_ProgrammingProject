@@ -15,7 +15,7 @@ class TestApiFunctionallity(unittest.TestCase):
     
     def test_empty_movie_list(self):
         list = getListOfMovies()
-        assert list is []
+        assert list is not []
         
 if __name__ == '__main__':
     unittest.main()        
