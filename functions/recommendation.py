@@ -1,4 +1,5 @@
-listOfMovies = {}
+from models.movie import Movie
+listOfMovies = []
 listOfRecommendations = []
 
 
@@ -12,7 +13,7 @@ def getListOfMovies():
             movie = movie[2:-1]
             if(movie.count('') < len(movie)):
                 movie_title += ','.join(movie)
-            listOfMovies[movie_id] = movie_title               
+            listOfMovies.append(Movie(id=movie_id, title=movie_title))            
         return listOfMovies
 
 
