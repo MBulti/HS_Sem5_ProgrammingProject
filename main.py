@@ -4,15 +4,17 @@ This returns the movie recommendation based on a entered movie
 """
 import os
 
+
 from flask_cors import CORS
 from flask import Flask, request
 from functions.recommendation import getListOfMovies, getListOfRecommendations
+
 
 __all__ = [getListOfMovies, getListOfRecommendations]
     
 app = Flask(__name__)
 CORS(app)
-started = False
+
 
 @app.route('/movies')
 def get_movies():
