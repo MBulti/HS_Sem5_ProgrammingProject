@@ -6,7 +6,7 @@ import os
 
 
 from flask_cors import CORS
-from flask import Flask, request
+from flask import Flask, request, render_template
 from functions.recommendation import getListOfMovies, getListOfRecommendations
 
 
@@ -15,6 +15,10 @@ __all__ = [getListOfMovies, getListOfRecommendations]
 app = Flask(__name__)
 CORS(app)
 
+
+@app.route('/')
+def index():
+    return render_template('index.html')
 
 @app.route('/movies')
 def get_movies():
