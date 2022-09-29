@@ -1,21 +1,22 @@
 import unittest
 
 from functions.recommendation import getListOfMovies
-    
+from models.movie import Movie
+
 
 class TestApiFunctionallity(unittest.TestCase):
-    
+
     def test_movie_list(self):
-        subset = {'1': 'Dinosaur Planet'}
+        newmov = Movie(id='1', title='Dinosaur Planet')
         list = getListOfMovies()
         # act
-        self.assertDictContainsSubset(subset=subset, dictionary= list)
+        self.assertEqual(newmov, list[0])
         # assert
-    
+
     def test_empty_movie_list(self):
-        subset = {}
         list = getListOfMovies()
-        assert list is not subset
-        
+        assert list is not []
+
+
 if __name__ == '__main__':
-    unittest.main()        
+    unittest.main()
