@@ -3,28 +3,16 @@ Implementation of Programming Project Flask API
 This returns the movie recommendation based on a entered movie
 """
 import os
-import asyncio
-import wget
 
-from os.path import exists
+from flask_cors import CORS
 from flask import Flask, request
-from recommendation import *
+from recommendation import getListOfMovies, getListOfRecommendations
+
+__all__ = [getListOfMovies, getListOfRecommendations]
     
 app = Flask(__name__)
+CORS(app)
 started = False
-
-@app.route('/dev') 
-def tessting_data():
-    if(not exists('netflix_rating.csv')):
-        load_data()
-    return 'Data loaded', 200
-
-@app.route('/data') 
-async def test_routes():
-    global started
-    if(not exists('combined_data_4.txt') and not started):
-       await wget.download('https://zenodo.org/record/4556134/files/combined_data_4.txt?download=1')
-    return {}
 
 @app.route('/movies')
 def get_movies():
