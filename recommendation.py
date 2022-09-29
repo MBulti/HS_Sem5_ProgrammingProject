@@ -7,14 +7,17 @@ def getListOfMovies():
     global listOfMovies
     with open("data/movie_titles.csv", encoding='latin-1') as f:
         for line in f:
-            movie = line.split(',')
-            movie_id = movie[0]
-            movie_title = movie[1]
-            movie = movie[2:-1]
-            if(movie.count('') < len(movie)):
-                movie_title += ','.join(movie)
-            listOfMovies.append(Movie(id=movie_id, title=movie_title))            
+            listOfMovies.append(create_movie(line))            
         return listOfMovies
+
+def create_movie(line):
+    movie = line.split(',')
+    movie_id = movie[0]
+    movie_title = movie[1]
+    movie = movie[2:-1]
+    if(movie.count('') < len(movie)):
+        movie_title += ','.join(movie)
+    return Movie(id=movie_id,title=movie_title)
 
 
 def getListOfRecommendations(movies):
