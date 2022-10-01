@@ -204,7 +204,10 @@ cython_debug/
 
 .vscode
 /netflix_rating.csv
-/combined_data_4.txt
-
+combined_data_4.txt
+combined_data_3.txt
+combined_data_2.txt
+combined_data_1.txt
+netflix_rating.csv
 
 # End of https://www.toptal.com/developers/gitignore/api/visualstudiocode,venv
