@@ -209,5 +209,7 @@ combined_data_3.txt
 combined_data_2.txt
 combined_data_1.txt
 netflix_rating.csv
+sparse_matrix.npz
+movie_similarity.npz
 
 # End of https://www.toptal.com/developers/gitignore/api/visualstudiocode,venv

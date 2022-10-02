@@ -1,5 +1,7 @@
+import pandas as pd
 from random import randint
 from models.movie import Movie
+
 listOfMovies = []
 listOfRecommendations = []
 
@@ -23,10 +25,16 @@ def create_movie(line):
 
 
 def getListOfRecommendations(movies):
-    movs = []
-    for i in range(5):
-        movs.append(randint(1, 17700))
-    return movs
+    movie_recommendations = []
+    for movie in movies:
+        if(movie > 17700):
+            raise ValueError('The given id is not an actual movie')
+        df = pd.read_csv('data/recommendation.csv', header=None)
+        recommendations = (df.loc[df[0] == movie].values).tolist()[0]
+        movie_recommendations.append(recommendations[1:6])
+    return(movie_recommendations)
+
+
 
 
 def getRecommendation():
