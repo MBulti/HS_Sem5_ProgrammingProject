@@ -65,7 +65,6 @@ def create_similarity_matrix():
         movie_ids = np.unique(movie_similarity.nonzero()[1])
         with open('data/recommendation.csv', mode='w') as m:
             for movie in movie_ids:
-                # Get the top similar movies and store them in the dictionary
                 sim_movies = movie_similarity[movie].toarray().ravel().argsort()[::-1][1:]
                 current_movies = list(sim_movies[:20])
                 current_movies.insert(0, movie)
