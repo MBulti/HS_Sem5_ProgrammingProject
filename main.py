@@ -6,7 +6,7 @@ import os
 
 from flask_cors import CORS
 from flask import Flask, request, render_template
-from functions.recommendation import getListOfMovies, getListOfRecommendations
+from functions.data_output import getListOfMovies, getListOfRecommendations
 
 app = Flask(__name__)
 CORS(app)
@@ -27,10 +27,16 @@ def get_recommendation():
     requestData = request.form.get('movies')
     if (requestData is None):
         return 'No input data was given', 400
-    movieList = requestData.split(',')
-    if (movieList is None):
-        return 'The input data is not in the correct format', 400
-    return getListOfRecommendations(movieList)
+    try:
+        if ',' in requestData:
+            movie_ids = [int(mov) for mov in requestData.split(',')]
+            if(len(movie_ids) > 5):
+                return 'No more than five movies can be selected at a time', 400
+        else:
+            movie_ids = [int(requestData)]   
+        return getListOfRecommendations(movie_ids)
+    except Exception as e:
+        return 'The input data is not in the correct format. The message was: ({0})'.format(e) , 400
 
 
 if __name__ == '__main__':
