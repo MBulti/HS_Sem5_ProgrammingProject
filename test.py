@@ -1,6 +1,6 @@
 import unittest
 
-from functions.recommendation import getListOfMovies
+from functions.data_output import getListOfMovies
 from models.movie import Movie
 
 
