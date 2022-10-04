@@ -3,6 +3,6 @@ from dataclasses import dataclass
 
 @dataclass(unsafe_hash=True)
 class Movie:
-    id: int
+    id: str
     release_year: str
     title: str

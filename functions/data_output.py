@@ -21,7 +21,7 @@ def create_movie(line):
         movie_title += ','.join(movie)
     else:
         movie_title = movie[0]
-    return Movie(id=int(movie_id), release_year=movie_date, title=movie_title)
+    return Movie(id=movie_id, release_year=movie_date, title=movie_title)
 
 
 def getListOfRecommendations(movies: list[int]):
