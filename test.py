@@ -7,7 +7,7 @@ from models.movie import Movie
 class TestApiFunctionallity(unittest.TestCase):
 
     def test_movie_list(self):
-        newmov = Movie(id='1', title='Dinosaur Planet')
+        newmov = Movie(id=1, release_year='2003', title='Dinosaur Planet')
         list = getListOfMovies()
         # act
         self.assertEqual(newmov, list[0])
