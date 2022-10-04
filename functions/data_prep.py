@@ -9,8 +9,13 @@ from scipy import sparse
 from sklearn.metrics.pairwise import cosine_similarity
 
 
-def prepare_data():
-    start = datetime.now()
+def prepare_data() -> None:
+    """
+    Creates a combined csv file from the txt files of the netflix price data
+    In order for this to work the data folder needs to be filed with the combined_data 1 - 4
+    This uses only the ratings above 3 and only 500 reviews per movie
+    """
+    start_time = datetime.now()
     datasets = ['data/combined_data_1.txt', 'data/combined_data_2.txt',
                 'data/combined_data_3.txt', 'data/combined_data_4.txt']
     for file in datasets:
@@ -42,11 +47,18 @@ def prepare_data():
     else:
         raise FileExistsError(
             'File already exists. Please delete to try again!')
-    print('Time taken :', datetime.now() - start)
+    print('Time taken :', datetime.now() - start_time)
 
 
-def create_similarity_matrix():
-    start = datetime.now()
+def create_similarity_matrix() -> None:
+    """
+    Creates a similarty matrix based on the rating csv file
+    In order for this to work the prepare data function must have been executed 
+    A sparse matrix will be created base on which we create a movie to movie similarity
+    Since this is 1 17700 x 17700 matrix we create a top 20 matrix based on this
+    The results are entered into a csv file
+    """
+    start_time = datetime.now()
     df = pd.read_csv('data/netflix_rating.csv', sep=',',
                      names=['movie', 'user', 'rating'])
     if not os.path.isfile('data/sparse_matrix.npz'):
@@ -59,7 +71,7 @@ def create_similarity_matrix():
         sparse_matrix = sparse.load_npz('data/sparse_matrix.npz')
 
     if not os.path.isfile('data/movie_similarity.npz'):
-        start = datetime.now()
+        start_time = datetime.now()
         movie_similarity = cosine_similarity(
             X=sparse_matrix.T, dense_output=False)
         # Store this sparse matrix in disk before using it. For future purposes.
@@ -81,12 +93,23 @@ def create_similarity_matrix():
                 m.write('\n')
         print('Created similatiry csv for top 20 movies')
 
-    print('Time taken :', datetime.now() - start)
+    print('Time taken :', datetime.now() - start_time)
 
 
 if __name__ == '__main__':
+    """
+    We create this to anable the usage of this file with python execution paramenters
+    Usage:
+    python -m data_prep.py prepare_data
+    or:
+    py.exe .\functions\data_prep.py prepare_data 
+    """
     args = sys.argv
     if (len(args) <= 1):
         error('No Parameters were set. No Function will be executed!')
     else:
-        globals()[args[1]]()
+        try:
+            globals()[args[1]]()
+        except Exception as ex:
+            raise ValueError(
+                'No function with this name was found. Bad parameter input')
