@@ -17,8 +17,7 @@ def get_user_ids_to_drop():
     for i in data:
         user_ids_to_drop.append(i['User_Id'])
     return user_ids_to_drop
-
-
+    
 def prepare_data() -> None:
     """
     Creates a combined csv file from the txt files of the netflix price data
