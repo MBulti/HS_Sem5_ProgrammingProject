@@ -45,7 +45,7 @@ def get_list_of_recommendation(movies: list[int]) -> list[Recommendation]:
     """
     movie_recommendations: list[Recommendation] = []
     for movie in movies:
-        if (movie > 17700):
+        if (movie > 17770):
             raise ValueError('The given id is not an actual movie')
         df = pd.read_csv('data/recommendation.csv', header=None)
         recommendations = (df.loc[df[0] == movie].values).tolist()[0]
