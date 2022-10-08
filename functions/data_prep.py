@@ -8,6 +8,9 @@ from logging import error
 from datetime import datetime
 from scipy import sparse
 from sklearn.metrics.pairwise import cosine_similarity
+from database_operations import insert_into_recomendations_table, insert_into_movies_table
+
+__all__ = ["insert_into_movies_table", "insert_into_recomendations_table"]
 
 
 def get_user_ids_to_drop():
@@ -17,6 +20,35 @@ def get_user_ids_to_drop():
     for i in data:
         user_ids_to_drop.append(i['User_Id'])
     return user_ids_to_drop
+
+def prepare_movies_db() -> None:
+    list_of_movies: list[str] = []
+    with open("data/movie_titles.csv", encoding='latin-1') as f:
+        for line in f:
+            list_of_movies.append(create_movie(line))
+            
+    insert_into_movies_table(list_of_movies)
+    # print(list_of_movies)
+
+
+def create_movie(line: str) -> str:
+    """
+    creates a movie based on the csv line given by the get_list_of_movies function
+    splits the line by ,
+    replaces the \\n at the end
+    if the movie contains a , it will join the remaining title
+    """
+    movie = line.split(',')
+    movie[-1] = movie[-1].replace('\n', '')
+    movie_id = movie.pop(0)
+    movie_year = movie.pop(0)
+    if (len(movie) > 1):
+        movie_title = movie.pop(0)
+        movie_title += ','.join(movie)
+    else:
+        movie_title = movie[0]
+    return (movie_id, movie_year, movie_title)
+
     
 def prepare_data() -> None:
     """
@@ -96,17 +128,15 @@ def create_similarity_matrix() -> None:
         movie_similarity = sparse.load_npz("data/movie_similarity.npz")
 
     if not os.path.isfile('data/recommendation.csv'):
-        print('Creating similatiry csv for top 20 movies')
+        print('Creating similatiry db table for top 20 movies')
+        recommendations = []
         movie_ids = np.unique(movie_similarity.nonzero()[1])
-        with open('data/recommendation.csv', mode='w') as m:
-            for movie in movie_ids:
-                sim_movies = movie_similarity[movie].toarray().ravel().argsort()[
-                    ::-1][1:]
-                current_movies = list(sim_movies[:20])
-                current_movies.insert(0, movie)
-                print(current_movies)
-                m.write(",".join(str(e) for e in current_movies))
-                m.write('\n')
+        for movie in movie_ids:
+            sim_movies = movie_similarity[movie].toarray().ravel().argsort()[
+            ::-1][1:]
+            current_movies = list(sim_movies[:5])
+            recommendations.append((int(movie), ','.join(str(e) for e in current_movies)))
+        insert_into_recomendations_table(recommendations)
         print('Created similatiry csv for top 20 movies')
 
     print('Time taken :', datetime.now() - start_time)
@@ -124,7 +154,5 @@ if __name__ == '__main__':
     if (len(args) <= 1):
         error('No Parameters were set. No Function will be executed!')
     else:
-        try:
-            globals()[args[1]]()
-        except Exception as ex:
-            raise ValueError(ex)
+        globals()[args[1]]()
+

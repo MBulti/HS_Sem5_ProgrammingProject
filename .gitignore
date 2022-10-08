@@ -203,7 +203,7 @@ cython_debug/
 .idea/
 
 .vscode
-/netflix_rating.csv
+movie_titles.csv
 combined_data_4.txt
 combined_data_3.txt
 combined_data_2.txt
