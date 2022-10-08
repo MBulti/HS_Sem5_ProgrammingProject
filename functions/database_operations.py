@@ -56,7 +56,7 @@ def insert_into_movies_table(movies):
 def get_all_movies():
     if(database_connection is None or database_cursor is None):
         establish_db_connection()
-    response = database_cursor.execute("SELECT * FROM movie").fetchall()
+    response = database_cursor.execute("SELECT * FROM Movies").fetchall()
     close_connection()
     return response
 

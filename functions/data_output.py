@@ -12,7 +12,7 @@ def get_list_of_movies() -> list[Movie]:
     returns the list of movies that are available
     opens the movie db and casts each value into a movie
     """
-    return [Movie(id=full_title[0], release_year=full_title[1], title=full_title[2]) for full_title in get_all_movies()]
+    return [Movie(id=str(full_title[0]), release_year=full_title[1], title=full_title[2]) for full_title in get_all_movies()]
 
 
 
