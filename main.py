@@ -1,14 +1,15 @@
-"""
+'''
 Implementation of Programming Project Flask API
-"""
+'''
 import os
 
 from flask_cors import CORS
 from flask import Flask, request, render_template
 from functions.data_output import get_list_of_movies, get_list_of_recommendation
+from functions.database_operations import init_database
 
 # This enables ide support for our custom functions and models
-__all__ = ['get_list_of_movies', 'get_list_of_recommendation']
+__all__ = ['get_list_of_movies', 'get_list_of_recommendation', 'init_database']
 
 # enables flask
 app = Flask(__name__)
@@ -19,20 +20,20 @@ CORS(app)
 
 @app.route('/', methods=['GET'])
 def index():
-    """
+    '''
     Enpoint home route
     returns the index html 
-    """
+    '''
     return render_template('index.html')
 
 
 @app.route('/movies', methods=['GET'])
 def get_movies():
-    """
+    '''
     Endpoint for the movies
     trys to execute the get_list_of_movies function 
     returns the result as a json
-    """
+    '''
     try:
         return get_list_of_movies()
     except Exception as e:
@@ -41,13 +42,13 @@ def get_movies():
 
 @app.route('/recommendation', methods=['GET'])
 def get_recommendation():
-    """
+    '''
     Endpoint for the recommendations
     checks if the url contains ?movies=
     checks if the data is either an int or list[int] and adds to a list
     trys to execute the get_list_of_recommendations with this data
     returns the recommendations or a 400 if anything goes wrong
-    """
+    '''
     request_data = request.args.get('movies')
     if (request_data is None):
         return 'No input data was given', 400
@@ -64,8 +65,9 @@ def get_recommendation():
 
 
 if __name__ == '__main__':
-    """
+    '''
     configures the port and hosting for the flask api
-    """
-    cfg_port = os.getenv('PORT', "5000")
-    app.run(host="0.0.0.0", port=cfg_port)
+    '''
+    init_database()
+    cfg_port = os.getenv('PORT', '5000')
+    app.run(host='0.0.0.0', port=cfg_port)
