@@ -1,80 +1,136 @@
-<h1 id="hs_sem5_programmingproject">HS_Sem5_ProgrammingProject</h1>
-<p>HS Osnabrück - 5 Semester - Prüfungsleistung im Modul Programmierprojekt</p>
-<h2 id="hinweis">Hinweis</h2>
-<p>
-  Nur Implementierung der API Schnittstelle. Die Implementierung des Frontends
-  wird in einem separaten Repository bearbeitet. (<a
-    href="https://github.com/MBulti/HS_Sem5_ProgrammingProject_Frontend"
-    >https://github.com/MBulti/HS_Sem5_ProgrammingProject_Frontend</a
-  >)
-</p>
-<h2 id="aufgabenbeschreibung">Aufgabenbeschreibung</h2>
-<p>
-  Netflix streams movies to its users andshared its data to provide improved
-  movie recommendations. You are tasked to create a recommenation system for its
-  users.
-</p>
-<p>
-  To do this exercise, the company provides several files, such as information
-  on the movies, and user ratings, summing up to a total of 480189 unique users
-  and 17770 movies. As the movie details provided in the data-set you are
-  expected to take advantage of publicly available information, such as the
-  latest IMDb information here
-  <a href="https://www.imdb.com/interfaces/">https://www.imdb.com/interfaces/</a
-  >.
-</p>
-<p>
-  Further details can be found here
-  <a href="https://www.kaggle.com/datasets/netflix-inc/netflix-prize-data"
-    >https://www.kaggle.com/datasets/netflix-inc/netflix-prize-data</a
-  >
-</p>
-<h2 id="projektmanagement">Projektmanagement</h2>
-<p>
-  Die Durchführung des Projektes erfolgt in drei Sprints. Das Management wird
-  über Jira durchgeführt.
-  <a
-    href="https://hsosprojekte.atlassian.net/jira/software/projects/PROG/boards/2/backlog"
-    >https://hsosprojekte.atlassian.net/jira/software/projects/PROG/boards/2/backlog</a
-  >
-</p>
-<h2 id="deployment">Deployment</h2>
-<p>
-  Die API wird über Heroku automatisch bei Änderungen gebaut und neu deployed.
-  Zurzeit ist sie über
-  <a href="https://recommender-system-hs.herokuapp.com/"
-    >https://recommender-system-hs.herokuapp.com/</a
-  >
-  aufrufbar.
-</p>
-<p>Eine detailierte Beschreibung folgt.</p>
-<p>
-  Rückgabe der Filme:
-  <a href="https://recommender-system-hs.herokuapp.com/movies"
-    >https://recommender-system-hs.herokuapp.com/movies</a
-  >
-</p>
-<h2 id="how-to-use">How to use</h2>
-<ol>
-  <li>
-    git clone
-    <a href="https://github.com/MBulti/HS_Sem5_ProgrammingProject.git"
-      >https://github.com/MBulti/HS_Sem5_ProgrammingProject.git</a
-    >
-  </li>
-  <li>pip install virtualenv</li>
-  <li>python -m venv env</li>
-  <li>.\evn\Scripts\activate</li>
-  <li>pip3 install -r .\requirements.txt</li>
-</ol>
-<h3 id="run-api">Run API</h3>
-<ol>
-  <li>python .\main.py</li>
-</ol>
-<h3 id="create-datafiles">Create datafiles</h3>
-<ol>
-  <li>Download combined_data 1 - 4 and put into data folder</li>
-  <li>python .\functions\data_prep.py prepare_data</li>
-  <li>delete data/recommendations.csv</li>
-  <li>python .\functions\data_prep.py create_similarity_matrix</li>
-</ol>
+<html>
+  <body>
+    <h1 id="hs_sem5_programmingproject">HS_Sem5_ProgrammingProject</h1>
+    <p>
+      HS Osnabrück - 5 Semester - Assessment for the module Programming Project
+    </p>
+    <h2 id="note">Note</h2>
+    <p>
+      Implementation of the API interface only. Implementation of the frontend
+      is handled in a separate repository. (<a
+        href="https://github.com/MBulti/HS_Sem5_ProgrammingProject_Frontend"
+        >https://github.com/MBulti/HS_Sem5_ProgrammingProject_Frontend</a
+      >)
+    </p>
+    <h2 id="task-description">Task description</h2>
+    <p>
+      Netflix streams movies to its users andshared its data to provide improved
+      movie recommendations. You are tasked to create a recommenation system for
+      its users.
+    </p>
+    <p>
+      To do this exercise, the company provides several files, such as
+      information on the movies, and user ratings, summing up to a total of
+      480189 unique users and 17770 movies. As the movie details provided in the
+      data-set you are expected to take advantage of publicly available
+      information, such as the latest IMDb information here
+      <a href="https://www.imdb.com/interfaces/"
+        >https://www.imdb.com/interfaces/</a
+      >.
+    </p>
+    <p>
+      Further details can be found here
+      <a href="https://www.kaggle.com/datasets/netflix-inc/netflix-prize-data"
+        >https://www.kaggle.com/datasets/netflix-inc/netflix-prize-data</a
+      >
+    </p>
+    <h2 id="project-management">Project Management</h2>
+    <p>
+      The project is implemented in three sprints. Management is carried out via
+      Jira.
+      <a
+        href="https://hsosprojekte.atlassian.net/jira/software/projects/PROG/boards/2/backlog"
+        >https://hsosprojekte.atlassian.net/jira/software/projects/PROG/boards/2/backlog</a
+      >
+    </p>
+    <h2 id="access-via-frontend">Access via Frontend</h2>
+    <p>
+      The frontend of this application is available via
+      <a href="https://programmierprojekt.com"
+        >https://programmierprojekt.com</a
+      >
+    </p>
+    <h2 id="deployment">Deployment</h2>
+    <p>
+      The API is deployed via a ci/cd pipeline using github actions. With the
+      deployment of new changes the python file is tested and later pushed to
+      the heroku app.
+    </p>
+    <p>Both the linting and code validity is checked before doing so.</p>
+    <p>Only after the build step is completed the deploy step begins</p>
+    <p>The three relevant enpoints are as follows:</p>
+    <h3 id="this-index-html-file">This index html file</h3>
+    <p>
+      <a href="https://recommender-system-hs.herokuapp.com/"
+        >https://recommender-system-hs.herokuapp.com/</a
+      >
+    </p>
+    <h3 id="the-list-of-available-movies">The list of available movies</h3>
+    <p>
+      <a href="https://recommender-system-hs.herokuapp.com/movies"
+        >https://recommender-system-hs.herokuapp.com/movies</a
+      >
+    </p>
+    <h3 id="a-recommendation-based-on-a-given-movie-id">
+      A recommendation based on a given movie id
+    </h3>
+    <p>
+      <a
+        href="https://recommender-system-hs.herokuapp.com/recommendation?movies=111"
+        >https://recommender-system-hs.herokuapp.com/recommendation?movies=111</a
+      >
+    </p>
+    <p>or for multiple</p>
+    <p>
+      <a
+        href="https://recommender-system-hs.herokuapp.com/recommendation?movies=111,420,69"
+        >https://recommender-system-hs.herokuapp.com/recommendation?movies=111,420,69</a
+      >
+    </p>
+    <h2 id="how-to-use">How to use</h2>
+    <ol>
+      <li>
+        git clone
+        <a href="https://github.com/MBulti/HS_Sem5_ProgrammingProject.git"
+          >https://github.com/MBulti/HS_Sem5_ProgrammingProject.git</a
+        >
+      </li>
+      <li>pip install virtualenv</li>
+      <li>python -m venv env</li>
+      <li>.\evn\Scripts\activate</li>
+      <li>pip3 install -r .\requirements.txt</li>
+    </ol>
+    <h3 id="run-api">Run API</h3>
+    <ol>
+      <li>python .\main.py</li>
+    </ol>
+    <h3 id="create-datafiles">Create Datafiles</h3>
+    <ol>
+      <li>Delete everything from the data folder except the testset.json</li>
+      <li>
+        Download Data from Netflix prize set
+        <a href="https://www.kaggle.com/datasets/netflix-inc/netflix-prize-data"
+          >https://www.kaggle.com/datasets/netflix-inc/netflix-prize-data</a
+        >
+      </li>
+      <li>Add combined_data 1 - 4 .txt to data folder</li>
+      <li>Add movie_titles.csv to the data folder</li>
+      <li>
+        <p>
+          Execute the following python code to generate the datasets (takes up
+          to 8 mins!)
+        </p>
+        <ol>
+          <li>py .\functions\database_operations.py init_database</li>
+          <li>py .\functions\data_prep.py prepare_movies_db</li>
+          <li>py .\functions\data_prep.py prepare_data</li>
+          <li>py .\functions\data_prep.py create_similarity_matrix</li>
+        </ol>
+      </li>
+    </ol>
+    <h3 id="run-evaluation">Run Evaluation</h3>
+    <ol>
+      <li>py -m data_evaluation.py</li>
+    </ol>
+  </body>
+</html>
