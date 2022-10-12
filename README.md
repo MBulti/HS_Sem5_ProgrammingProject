@@ -59,7 +59,7 @@ https://recommender-system-hs.herokuapp.com/recommendation?movies=111,420,69
 ## How to use
 
 1. git clone https://github.com/MBulti/HS_Sem5_ProgrammingProject.git
-1. pip install virtualenv
+1. pip3 install virtualenv
 1. python -m venv env
 1. .\evn\Scripts\activate
 1. pip3 install -r .\requirements.txt
@@ -76,11 +76,11 @@ https://recommender-system-hs.herokuapp.com/recommendation?movies=111,420,69
 1. Add movie_titles.csv to the data folder
 1. Execute the following python code to generate the datasets (takes up to 8 mins!)
 
-   1. py .\functions\database_operations.py init_database
-   1. py .\functions\data_prep.py prepare_movies_db
-   1. py .\functions\data_prep.py prepare_data
-   1. py .\functions\data_prep.py create_similarity_matrix
+   1. python .\functions\database_operations.py init_database
+   1. python .\functions\data_prep.py prepare_movies_db
+   1. python .\functions\data_prep.py prepare_data
+   1. python .\functions\data_prep.py create_similarity_matrix
 
 ### Run Evaluation
 
-1. py -m data_evaluation.py
+1. python -m data_evaluation.py
