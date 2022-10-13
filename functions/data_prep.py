@@ -151,11 +151,11 @@ def create_similarity_matrix() -> None:
         for movie in movie_ids:
             sim_movies = movie_similarity[movie].toarray().ravel().argsort()[
                 ::-1][1:]
-            current_movies = list(sim_movies[:5])
+            current_movies = list(sim_movies[:20])
             recommendations.append(
                 (int(movie), ','.join(str(e) for e in current_movies)))
         insert_into_recomendations_table(recommendations)
-        print('Created similatiry csv for top 5 movies')
+        print('Created similatiry csv for top 20 movies')
 
     print('Time taken :', datetime.now() - start_time)
 
