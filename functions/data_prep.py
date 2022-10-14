@@ -145,7 +145,7 @@ def create_similarity_matrix() -> None:
         movie_similarity = sparse.load_npz('data/movie_similarity.npz')
 
     if not os.path.isfile('data/recommendation.csv'):
-        print('Creating similatiry db table for top 20 movies')
+        print('Creating similatiry db table for top 15 movies')
         recommendations = []
         movie_ids = np.unique(movie_similarity.nonzero()[1])
         for movie in movie_ids:
