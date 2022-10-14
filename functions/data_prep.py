@@ -72,7 +72,7 @@ def prepare_data() -> None:
     '''
     Creates a combined csv file from the txt files of the netflix price data
     In order for this to work the data folder needs to be filed with the combined_data 1 - 4
-    This uses only the ratings above 3 and only 500 reviews per movie
+    This uses only the ratings equal to 5 and only 500 reviews per movie
     '''
     user_ids_to_drop = get_user_ids_to_drop()
     start_time = datetime.now()
